@@ -13,12 +13,14 @@ from network import BF_CNN
 
 import deepinv as dinv
 
+# from denoisers import TVDenoiser
 
 ################################################# Helper Functions #################################################
 def load_denoiser(architecture,grayscale, training_data, training_noise): 
     if architecture=='BF_CNN': 
         model = load_BF_CNN(grayscale, training_data, training_noise)
-
+    # if architecture == 'TV':
+    #     model = TVDenoiser(1)
     if architecture=='GSDRUNet': 
         # model = dinv.models.GSDRUNet(pretrained="denoisers\GSDRUNet\GSDRUNet.ckpt", train=False)
         model = dinv.models.GSDRUNet(pretrained="download", train=False)
