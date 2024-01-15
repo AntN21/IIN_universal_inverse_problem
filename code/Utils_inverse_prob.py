@@ -11,12 +11,23 @@ import gzip
 import argparse
 from network import BF_CNN
 
+import deepinv as dinv
+
+# from denoisers import TVDenoiser
+
 ################################################# Helper Functions #################################################
 def load_denoiser(architecture,grayscale, training_data, training_noise): 
     if architecture=='BF_CNN': 
         model = load_BF_CNN(grayscale, training_data, training_noise)
+    # if architecture == 'TV':
+    #     model = TVDenoiser(1)
+    if architecture=='GSDRUNet': 
+        # model = dinv.models.GSDRUNet(pretrained="denoisers\GSDRUNet\GSDRUNet.ckpt", train=False)
+        model = dinv.models.GSDRUNet(pretrained="download", train=False)
 
-        
+    if architecture=='DnCNN': 
+        model = dinv.models.DnCNN(pretrained="denoisers\DnCNN\dncnn_sigma2_color.pth", train=False)
+        model = dinv.models.DnCNN(pretrained="download", train=False)
     return model
 
 def load_BF_CNN(grayscale, training_data, training_noise): 

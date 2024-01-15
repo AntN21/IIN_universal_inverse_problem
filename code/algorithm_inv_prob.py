@@ -76,7 +76,8 @@ def univ_inv_sol(model, x_c ,task ,sig_0=1, sig_L=.01, h0=.01 , beta=.01 , freq=
 
 
     print("-------- total number of iterations, " , t )
-    print("-------- average time per iteration (s), " , np.round((time.time() - start_time_total)/(t-1)  ,4) )
+    if t > 0:
+        print("-------- average time per iteration (s), " , np.round((time.time() - start_time_total)/(t-1)  ,4) )
 
     denoised_y = y - model(y)
 
