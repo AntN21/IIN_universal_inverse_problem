@@ -127,7 +127,9 @@ def modified_univ_inv_sol(model, x_c ,task ,sig_0=1, sig_L=.01, h0=.01 , beta=.0
 
     t=1
     start_time_total = time.time()
-    while sigma > sig_L:
+
+    max_iter = 100
+    while sigma > sig_L and t < max_iter:
         
         # print("bornes:",y.min(),"   ",y.max())
 
@@ -140,7 +142,7 @@ def modified_univ_inv_sol(model, x_c ,task ,sig_0=1, sig_L=.01, h0=.01 , beta=.0
 
         sigma = torch.norm(d)/np.sqrt(N)
 
-        gamma = sigma*np.sqrt(((1 - (beta*h))**2 - (1-h)**2 )) * np.exp(-t/10.)
+        gamma = sigma*np.sqrt(((1 - (beta*h))**2 - (1-h)**2 )) # * np.exp(-t/10.)
 
         noise = torch.randn(n_ch, im_d1,im_d2)
 
